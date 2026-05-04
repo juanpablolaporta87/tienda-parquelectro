@@ -1,0 +1,181 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Parquelectro Light Professional Theme */
+  --background: oklch(0.985 0.002 270);
+  --foreground: oklch(0.15 0.02 270);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.15 0.02 270);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.15 0.02 270);
+  
+  /* Deep Purple Primary - from logo */
+  --primary: oklch(0.5 0.25 295);
+  --primary-foreground: oklch(1 0 0);
+  
+  /* Vibrant Orange Secondary - from logo */
+  --secondary: oklch(0.68 0.2 50);
+  --secondary-foreground: oklch(1 0 0);
+  
+  /* Navy Blue Muted - from logo text */
+  --muted: oklch(0.95 0.01 260);
+  --muted-foreground: oklch(0.45 0.05 260);
+  
+  /* Deep Green Accent - from "Mayorista" text */
+  --accent: oklch(0.45 0.18 145);
+  --accent-foreground: oklch(1 0 0);
+  
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  
+  --border: oklch(0.9 0.01 270);
+  --input: oklch(0.97 0.005 270);
+  --ring: oklch(0.5 0.25 295);
+  
+  /* Brand colors - deeper for light theme */
+  --neon-purple: oklch(0.5 0.25 295);
+  --neon-orange: oklch(0.65 0.22 50);
+  --neon-blue: oklch(0.35 0.15 260);
+  --neon-lime: oklch(0.45 0.18 145);
+  --dark-surface: oklch(0.2 0.02 270);
+  
+  --chart-1: oklch(0.5 0.25 295);
+  --chart-2: oklch(0.65 0.22 50);
+  --chart-3: oklch(0.35 0.15 260);
+  --chart-4: oklch(0.45 0.18 145);
+  --chart-5: oklch(0.55 0.2 320);
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: oklch(0.08 0.01 270);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.12 0.015 270);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.1 0.01 270);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.65 0.28 295);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.72 0.21 45);
+  --secondary-foreground: oklch(0.1 0 0);
+  --muted: oklch(0.25 0.08 260);
+  --muted-foreground: oklch(0.7 0.02 260);
+  --accent: oklch(0.78 0.22 130);
+  --accent-foreground: oklch(0.1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.25 0.04 270);
+  --input: oklch(0.18 0.02 270);
+  --ring: oklch(0.65 0.28 295);
+}
+
+@theme inline {
+  --font-sans: 'Geist', 'Geist Fallback', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-orange: var(--neon-orange);
+  --color-neon-blue: var(--neon-blue);
+  --color-neon-lime: var(--neon-lime);
+  --color-dark-surface: var(--dark-surface);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Light theme - subtle text emphasis instead of glow */
+.neon-glow-purple {
+  color: oklch(0.5 0.25 295);
+  font-weight: 700;
+}
+
+.neon-glow-orange {
+  color: oklch(0.65 0.22 50);
+  font-weight: 700;
+}
+
+.neon-glow-blue {
+  color: oklch(0.35 0.15 260);
+  font-weight: 700;
+}
+
+.neon-glow-lime {
+  color: oklch(0.4 0.18 145);
+  font-weight: 700;
+}
+
+.neon-border-purple {
+  box-shadow: 0 4px 20px oklch(0.5 0.25 295 / 0.15),
+              0 1px 3px oklch(0 0 0 / 0.1);
+  border: 1px solid oklch(0.5 0.25 295 / 0.3);
+}
+
+.neon-border-orange {
+  box-shadow: 0 4px 20px oklch(0.65 0.22 50 / 0.15),
+              0 1px 3px oklch(0 0 0 / 0.1);
+  border: 1px solid oklch(0.65 0.22 50 / 0.3);
+}
+
+.gradient-neon {
+  background: linear-gradient(135deg, 
+    oklch(0.5 0.25 295 / 0.08) 0%,
+    oklch(0.65 0.22 50 / 0.08) 100%);
+}
+
+/* Product card hover - elegant shadow for light theme */
+.product-card-glow {
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px oklch(0 0 0 / 0.08);
+}
+
+.product-card-glow:hover {
+  box-shadow: 0 10px 40px oklch(0.5 0.25 295 / 0.15),
+              0 4px 12px oklch(0 0 0 / 0.1);
+  transform: translateY(-2px);
+}
+
+/* Logo container - subtle shadow for light theme */
+.logo-glow {
+  box-shadow: none;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
