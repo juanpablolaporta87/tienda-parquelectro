@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link" // [1] Importamos Link
+import Link from "next/Link" // [1] Importamos Link
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Zap, Shield, Truck } from "lucide-react"
 
