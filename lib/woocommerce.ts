@@ -1,4 +1,7 @@
-import fs from 'fs/promises' // Usa esta forma
+export type WooProduct = any;
+export type WooCategory = any;
+
+import fs from 'fs/promises'
 import path from 'path'
 import Papa from 'papaparse'
 
