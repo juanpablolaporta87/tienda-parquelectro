@@ -98,8 +98,7 @@ export function ProductGrid() {
         unitPrice: parseFloat(p.price) || 0,
         bulkPrice: calculateBulkPrice(p.price, 0.15),
         category: p.categories[0]?.name || "Sin categoría",
-        isNew: new Date(p.date_created).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000 // Nuevo si tiene menos de 30 días
-      }))
+        isNew: p.date_created ? new Date(p.date_created).getTime() > Date.now() - 30 * 24 * 60 * 60 * 1000 : false
     : fallbackProducts
 
   return (
