@@ -9,8 +9,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Se movió fuera de 'experimental' y cambió el nombre
-  serverExternalPackages: ['sharp'], 
+  experimental: {
+    serverComponentsExternalPackages: ['sharp'],
+  },
 }
 
 export default nextConfig

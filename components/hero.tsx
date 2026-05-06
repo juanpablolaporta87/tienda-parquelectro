@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import Link from "next/link" // [1] Importamos Link
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Zap, Shield, Truck } from "lucide-react"
 
@@ -13,7 +12,7 @@ export function Hero() {
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[120px] -translate-y-1/2" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-[120px] translate-y-1/2" />
       
-      {/* Grid Pattern */}
+      {/* Grid Pattern - adjusted for light theme */}
       <div 
         className="absolute inset-0 opacity-[0.03]"
         style={{
@@ -43,17 +42,13 @@ export function Hero() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              {/* [2] Envolvemos el botón con Link */}
-              <Link href="/products" className="contents">
-                <Button 
-                  size="lg" 
-                  className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 neon-border-purple w-full sm:w-auto"
-                >
-                  Ver Catálogo
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground font-semibold px-8 neon-border-purple"
+              >
+                Ver Catálogo
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
               <Button 
                 size="lg" 
                 variant="outline" 
@@ -89,10 +84,14 @@ export function Hero() {
           {/* Hero Image */}
           <div className="relative">
             <div className="relative aspect-square max-w-lg mx-auto">
+              {/* Glow Effects */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-[80px]" />
+              
+              {/* Animated Ring */}
               <div className="absolute inset-8 border-2 border-primary/20 rounded-full animate-pulse" />
               <div className="absolute inset-16 border border-secondary/20 rounded-full animate-pulse delay-500" />
               
+              {/* Product Image - clean card for light theme */}
               <div className="relative z-10 p-4">
                 <div className="relative bg-white rounded-2xl p-4 shadow-2xl shadow-primary/10 border border-border">
                   <Image
@@ -103,6 +102,7 @@ export function Hero() {
                     className="object-contain w-full h-auto rounded-xl"
                     priority
                   />
+                  {/* Subtle corner accents */}
                   <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-primary/40 rounded-tl-xl" />
                   <div className="absolute top-2 right-2 w-6 h-6 border-r-2 border-t-2 border-secondary/40 rounded-tr-xl" />
                   <div className="absolute bottom-2 left-2 w-6 h-6 border-l-2 border-b-2 border-secondary/40 rounded-bl-xl" />
@@ -110,6 +110,7 @@ export function Hero() {
                 </div>
               </div>
 
+              {/* Floating Badge */}
               <div className="absolute bottom-8 right-0 bg-card/90 backdrop-blur-sm border border-border rounded-xl p-4 shadow-xl">
                 <div className="flex items-center gap-3">
                   <div className="w-12 h-12 rounded-lg bg-accent/20 flex items-center justify-center">
