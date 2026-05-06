@@ -1,26 +1,40 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { getProducts, getProduct } from '@/lib/woocommerce'
+import fs from 'fs'
+import path from 'path'
+import Papa from 'papaparse'
 
 export async function GET(request: NextRequest) {
   try {
-    const { searchParams } = new URL(request.url)
-    const slug = searchParams.get('slug')
+    // 1. Buscamos el archivo en la nueva ubicación (public)
+    const filePath = path.join(process.cwd(), 'public', 'productos.csv');
     
+    // 2. Leemos el contenido
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+
+    // 3. Lo convertimos a JSON
+    const { data } = Papa.parse(fileContent, {
+      header: true,
+      skipEmptyLines: true,
+      dynamicTyping: true
+    });
+
+    console.log("Cantidad de productos encontrados:", data.length);
+
+    // 4. Filtros básicos (opcional por ahora para que funcione)
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get('slug');
+
     if (slug) {
-      const product = await getProduct(slug)
-      return NextResponse.json([product])
+      // @ts-ignore
+      const product = data.find(p => p.Handle === slug || p.handle === slug || p.slug === slug);
+      return NextResponse.json(product ? [product] : []);
     }
-    
-    const products = await getProducts({
-      page: parseInt(searchParams.get('page') || '1'),
-      per_page: parseInt(searchParams.get('per_page') || '12'),
-      category: searchParams.get('category') ? parseInt(searchParams.get('category')!) : undefined,
-      search: searchParams.get('search') || undefined,
-      orderby: (searchParams.get('orderby') as any) || 'date',
-      order: (searchParams.get('order') as any) || 'desc',
-    })
-    return NextResponse.json(products)
+
+    // Retornamos todos los productos de Parquelectro
+    return NextResponse.json(data);
+
   } catch (error: any) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    console.error("Error en API:", error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
