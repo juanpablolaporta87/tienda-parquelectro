@@ -86,3 +86,29 @@ export function calculateBulkPrice(price: string | number, discount = 0.15): num
 export function getProductImage(product: any): string {
   return product.images[0]?.src || '/images/placeholder.jpg';
 }
+// ============================================
+// CATEGORÍAS (Extraídas del CSV)
+// ============================================
+
+export async function getCategories(): Promise<any[]> {
+  const products = await getProducts();
+  // Extraemos las categorías únicas de tus productos de electrónica
+  const categoriesSet = new Set(products.map(p => p.categories[0]?.name).filter(Boolean));
+  
+  return Array.from(categoriesSet).map((catName, index) => ({
+    id: index + 1,
+    name: catName,
+    slug: catName.toLowerCase().replace(/ /g, '-'),
+  }));
+}
+
+export async function getCategory(id: number | string): Promise<any> {
+  const categories = await getCategories();
+  return categories.find(c => c.id == id || c.slug == id);
+}
+
+// Para evitar errores en la página de órdenes/pedidos
+export async function createOrder(data: any) {
+  console.log("Simulando creación de pedido:", data);
+  return { id: Math.floor(Math.random() * 1000), status: 'pending' };
+}
