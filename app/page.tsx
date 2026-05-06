@@ -7,7 +7,7 @@ import { ShoppingCart, Zap } from "lucide-react";
 
 export default async function Home() {
   // 1. Leemos el archivo CSV desde la carpeta lib
-  const filePath = path.join(process.cwd(), 'lib', 'products_export_1 (1).csv');
+  const filePath = path.join(process.cwd(), 'lib', 'productos.csv');
   const fileContent = fs.readFileSync(filePath, 'utf8');
   
   // 2. Parseamos los datos
