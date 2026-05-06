@@ -40,8 +40,9 @@ export const getProductImage = (image: any) => {
   return image?.src || '/images/placeholder.jpg';
 };
 
-export const calculateBulkPrice = (price: any) => {
-  // Si no necesitas precio mayorista, devolvemos el mismo precio
+// Ahora aceptamos el segundo dato (discount) para que no haya error
+export const calculateBulkPrice = (price: any, discount: any = 0) => {
+  // Simplemente devolvemos el precio para que la tienda siga su curso
   return price;
 };
 
