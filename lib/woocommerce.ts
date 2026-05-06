@@ -1,4 +1,4 @@
-import fs from 'fs'
+import { promises as fs } from 'fs'
 import path from 'path'
 import Papa from 'papaparse'
 
@@ -17,8 +17,11 @@ export interface WooProduct {
 // Función central para leer el CSV desde la carpeta PUBLIC
 async function getLocalProducts(): Promise<any[]> {
   try {
+    // Esto asegura que solo se ejecute en el servidor
+    if (typeof window !== 'undefined') return [];
+
     const filePath = path.join(process.cwd(), 'public', 'productos.csv');
-    const fileContent = fs.readFileSync(filePath, 'utf8');
+    const fileContent = await fs.readFile(filePath, 'utf8'); // Ahora usamos await
     
     const { data } = Papa.parse(fileContent, {
       header: true,
@@ -26,7 +29,6 @@ async function getLocalProducts(): Promise<any[]> {
       dynamicTyping: true
     });
 
-    // Mapeamos los campos de Shopify a los que espera tu tienda
     return data.map((item: any) => ({
       id: item.Handle || Math.random(),
       name: item.Title || item.name,
@@ -35,7 +37,7 @@ async function getLocalProducts(): Promise<any[]> {
       price: item['Variant Price'] || item.price || 0,
       images: [{ src: item['Image Src'] || item.image || '/images/placeholder.jpg' }],
       categories: [{ name: item.Type || item.category || 'Electrónica' }],
-      date_created: new Date().toISOString() // Fecha ficticia para que no de error
+      date_created: new Date().toISOString()
     }));
   } catch (error) {
     console.error("Error leyendo el CSV:", error);
