@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react" // Agregamos useEffect
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { Header } from "@/components/header"
@@ -23,6 +23,14 @@ export default function CheckoutPage() {
   })
 
   const total = getTotal()
+
+  // --- ARREGLO PARA VERCEL ---
+  // Redirigimos solo cuando el componente ya cargó en el navegador
+  useEffect(() => {
+    if (items.length === 0 && !success) {
+      router.push("/carrito")
+    }
+  }, [items, router, success])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -78,10 +86,8 @@ export default function CheckoutPage() {
     </div>
   )
 
-  if (items.length === 0) {
-    router.push("/carrito")
-    return null
-  }
+  // Si no hay items, no mostramos nada mientras el useEffect redirige
+  if (items.length === 0) return null
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,7 +99,6 @@ export default function CheckoutPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Formulario */}
           <form onSubmit={handleSubmit} className="lg:col-span-2 space-y-6">
             <div className="p-6 rounded-xl bg-card border border-border/50 space-y-4">
               <h2 className="font-bold text-foreground">Datos de contacto</h2>
@@ -166,7 +171,6 @@ export default function CheckoutPage() {
             </Button>
           </form>
 
-          {/* Resumen */}
           <div className="space-y-4">
             <div className="p-6 rounded-xl bg-card border border-border/50 space-y-4 sticky top-24">
               <h2 className="font-bold text-foreground">Tu pedido</h2>
