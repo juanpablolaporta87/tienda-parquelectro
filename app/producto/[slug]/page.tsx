@@ -9,7 +9,7 @@ import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
 import { ShoppingCart, ArrowLeft, Package, Truck, Shield, ChevronRight, Loader2, Plus, Minus, MessageCircle } from "lucide-react"
 import { useCart } from "@/hooks/use-cart"
-import { formatPrice, calculateBulkPrice } from "@/lib/woocommerce"
+import { formatPrice, calculateBulkPrice } from "@/lib/utils-price"
 
 export default function ProductPage() {
   const params = useParams()
