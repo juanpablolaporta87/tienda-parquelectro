@@ -166,7 +166,7 @@ export default function ProductPage() {
                 {added ? "¡Agregado!" : "Agregar al Carrito"}
               </Button>
               <a
-                href={`https://wa.me/5491112345678?text=${encodeURIComponent(whatsappMsg)}`}
+                href={`https://wa.me/5491130218931?text=${encodeURIComponent(whatsappMsg)}`}
                 target="_blank" rel="noopener noreferrer"
                 className="flex-1"
               >
