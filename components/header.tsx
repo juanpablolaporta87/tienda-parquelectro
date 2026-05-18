@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { Menu, X, ShoppingCart, Search, Zap } from "lucide-react"
+import { Menu, X, ShoppingCart, Search } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -25,26 +25,10 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-[#1B2C6B] shadow-lg shadow-[#1B2C6B]/30">
-      {/* Barra superior */}
-      <div className="hidden lg:block bg-[#152354] border-b border-white/10">
-        <div className="container mx-auto px-4 py-1.5 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-white/60">
-            <Zap className="w-3 h-3 text-[#F5A623]" />
-            <span>Envíos en 24hs al AMBA · Precios mayoristas sin intermediarios</span>
-          </div>
-          <div className="flex items-center gap-4 text-xs text-white/60">
-            <span>Lun–Vie 9:00–18:00 · Sáb 9:00–13:00</span>
-            <a href="https://wa.me/5491112345678" target="_blank" rel="noopener noreferrer"
-              className="text-[#2ECC40] hover:text-[#2ECC40]/80 font-medium transition-colors">
-              WhatsApp →
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 shadow-sm">
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between lg:h-20 gap-4">
+
           {/* Logo */}
           <Link href="/" className="flex items-center group shrink-0">
             <div className="relative h-12 w-44 lg:h-14 lg:w-52 group-hover:scale-105 transition-transform duration-300">
@@ -61,7 +45,7 @@ export function Header() {
               { href: "/contacto", label: "Contacto" },
             ].map(({ href, label }) => (
               <Link key={href} href={href}
-                className="text-sm font-medium text-white/80 hover:text-white transition-colors relative group">
+                className="text-sm font-semibold text-gray-600 hover:text-[#1B2C6B] transition-colors relative group">
                 {label}
                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#F5A623] group-hover:w-full transition-all duration-300" />
               </Link>
@@ -71,10 +55,10 @@ export function Header() {
           {/* Buscador desktop */}
           <form onSubmit={handleSearch} className="hidden lg:flex items-center flex-1 max-w-sm mx-4">
             <div className="relative w-full">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input type="search" placeholder="Buscar productos..."
                 value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                className="w-full pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/40 focus:border-[#F5A623] focus:ring-[#F5A623]/20 focus-visible:ring-[#F5A623]/20" />
+                className="w-full pl-10 bg-gray-50 border-gray-200 text-gray-800 placeholder:text-gray-400 focus:border-[#1B2C6B] focus-visible:ring-[#1B2C6B]/10 rounded-xl" />
             </div>
           </form>
 
@@ -82,17 +66,17 @@ export function Header() {
           <div className="flex items-center gap-2">
             <Link href="/carrito">
               <Button variant="ghost" size="icon"
-                className="relative text-white hover:bg-white/10 hover:text-white">
+                className="relative text-gray-600 hover:text-[#1B2C6B] hover:bg-[#EEF1FB]">
                 <ShoppingCart className="h-5 w-5" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#F5A623] text-[10px] font-bold flex items-center justify-center text-[#1B2C6B]">
+                  <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-[#F5A623] text-[10px] font-black flex items-center justify-center text-[#1B2C6B]">
                     {totalItems > 9 ? "9+" : totalItems}
                   </span>
                 )}
               </Button>
             </Link>
             <Button variant="ghost" size="icon"
-              className="lg:hidden text-white hover:bg-white/10"
+              className="lg:hidden text-gray-600 hover:bg-gray-100"
               onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
@@ -101,13 +85,13 @@ export function Header() {
 
         {/* Menú mobile */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t border-white/10 py-4">
+          <div className="lg:hidden border-t border-gray-100 py-4">
             <div className="flex flex-col gap-4">
               <form onSubmit={handleSearch} className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-white/40" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
                 <Input type="search" placeholder="Buscar productos..."
                   value={searchQuery} onChange={e => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 bg-white/10 border-white/20 text-white placeholder:text-white/40" />
+                  className="w-full pl-10 bg-gray-50 border-gray-200 rounded-xl" />
               </form>
               <nav className="flex flex-col gap-1">
                 {[
@@ -118,7 +102,7 @@ export function Header() {
                   { href: "/carrito", label: "🛒 Carrito" },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href}
-                    className="px-3 py-2.5 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                    className="px-3 py-2.5 text-sm font-semibold text-gray-600 hover:text-[#1B2C6B] hover:bg-[#EEF1FB] rounded-xl transition-colors"
                     onClick={() => setIsMenuOpen(false)}>
                     {label}
                   </Link>
