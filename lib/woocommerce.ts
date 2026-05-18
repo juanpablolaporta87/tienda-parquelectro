@@ -47,11 +47,27 @@ export async function getProducts(
   params: Record<string, string> = {}
 ): Promise<WooProduct[]> {
   try {
-    const res = await wcFetch("products", { per_page: "100", status: "publish", ...params });
-    if (!res.ok) return [];
-    return res.json();
+    let page = 1
+    let allProducts: WooProduct[] = []
+    
+    while (true) {
+      const res = await wcFetch("products", { 
+        per_page: "100", 
+        status: "publish", 
+        page: String(page),
+        ...params 
+      })
+      if (!res.ok) break
+      const data: WooProduct[] = await res.json()
+      if (data.length === 0) break
+      allProducts = [...allProducts, ...data]
+      if (data.length < 100) break
+      page++
+    }
+    
+    return allProducts
   } catch {
-    return [];
+    return []
   }
 }
 
